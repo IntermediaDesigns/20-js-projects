@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch Timer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./static/styles.css" />
+    <link href="./static/output.css" rel="stylesheet" />
+    <script
+      src="https://unpkg.com/htmx.org@2.0.2"
+      integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md text-center">
+      <h1 class="text-3xl font-bold mb-6 text-gray-800">Stopwatch Timer</h1>
+      <div class="space-x-2 mb-6">
+        <button
+          hx-post="/start"
+          hx-trigger="click"
+          hx-target="#time"
+          class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Start
+        </button>
+        <button
+          hx-post="/stop"
+          hx-trigger="click"
+          hx-target="#time"
+          class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Stop
+        </button>
+        <button
+          hx-post="/pause"
+          hx-trigger="click"
+          hx-target="#time"
+          class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Pause
+        </button>
+        <button
+          hx-post="/resume"
+          hx-trigger="click"
+          hx-target="#time"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Resume
+        </button>
+        <button
+          hx-post="/reset"
+          hx-trigger="click"
+          hx-target="#time"
+          class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Reset
+        </button>
+      </div>
+            <div id="time" class="text-5xl font-mono font-bold text-gray-700" hx-get="/time" hx-trigger="load, every 1s">00:00:00</div>
+    </div>
+    <script>
+      document.body.addEventListener("htmx:afterOnLoad", function (event) {
+        if (event.detail.elt.id === "time") {
+          var response = JSON.parse(event.detail.xhr.response);
+          document.getElementById("time").innerHTML = response.time;
+          if (!response.is_running) {
+            event.detail.elt.removeAttribute("hx-trigger");
+          } else {
+            event.detail.elt.setAttribute("hx-trigger", "every 1s");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
