@@ -12,29 +12,54 @@
   <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md text-center">
       <h1 class="text-3xl font-bold mb-6 text-gray-800">Stopwatch Timer</h1>
-      <div class="space-x-2 mb-6">
+      <div class="stopwatch">
+        <div class="timer text-5xl font-mono font-bold text-gray-700 mb-6">
+          <span id="minutes">00</span>: <span id="seconds">00</span>:
+          <span id="milliseconds">00</span>
+        </div>
+        <div class="space-x-2 mb-6" class="controls">
+          <button
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            id="startBtn"
+          >
+            Start
+          </button>
+          <button
+            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+            id="stopBtn"
+          >
+            Stop
+          </button>
+          <button
+            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+            id="pauseBtn"
+          >
+            Pause
+          </button>
+          <button
+            class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+            id="resetBtn"
+          >
+            Reset
+          </button>
+        </div>
+        <div class="laps">
+          <h3 class="font-bold">Lap Timer</h3>
+          <ul class="text-left mt-4" id="lapList"></ul>
+        </div>
         <button
-          class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-6"
+          id="lapBtn"
         >
-          Start
+          Lap
         </button>
         <button
-          class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-6"
+          id="clearBtn"
         >
-          Stop
-        </button>
-        <button
-          class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
-        >
-          Pause
-        </button>
-        <button
-          class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
-        >
-          Reset
+          Clear Laps
         </button>
       </div>
-      <div class="text-5xl font-mono font-bold text-gray-700">00:00:00</div>
     </div>
   </body>
 </html>
